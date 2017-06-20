@@ -1,5 +1,10 @@
 <?php
 require('functions.php');
 
-create($_POST);
+$res = checkreferer();
+if($res != 'back'){
+  header('location: ./index.php');
+}elseif ($res == 'index') {
+  header('location: ./index.php');
+}
  ?>

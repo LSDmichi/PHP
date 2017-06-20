@@ -28,3 +28,31 @@ function selectAll() {
   }
   return $todo;
 }
+
+function updateDB($id, $data) {
+  $dbh = connectPdo();
+  $sql = 'UPDATE todos SET todo = :todo WHERE id = :id';
+  $stmt = $dbh->prepare($sql);
+  $stmt->bindParam(':todo', $data, PDO::PARAM_STR);
+  $stmt->bindValue(':id', (int)$id, PDO::PARAM_INT);
+  $stmt->execute();
+}
+
+function getselectData($id) {
+  $dbh = connectPdo();
+  $sql = 'SELECT todo FROM todos WHERE id = :id AND deleted_at IS NULL';
+  $stmt = $dbh->prepare($sql);
+  $stmt->execute(array(':id' => (int)$id));
+  $data = $stmt->fetch();
+  return $data['todo'];
+}
+
+function deleteDB($id) {
+  $dbh = connectPdo();
+  $nowTime = date("Y-m-d H-i-s");
+  $sql = 'UPDATE todos SET deleted_at  = :deleted_at WHERE id = :id';
+  $stmt = $dbh->prepare($sql);
+  $stmt->bindParam(':deleted_at', $nowTime);
+  $stmt->bindValue(':id', $id, PDO::PARAM_INT);
+  $stmt->execute();
+}
