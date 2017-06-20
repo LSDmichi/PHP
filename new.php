@@ -2,15 +2,16 @@
 <html lang="ja">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>Document</title>
+  <title>新規作成ページ</title>
 </head>
 <body>
-  <p>ここでは新規作成をしましすよ！！</p>
-  <form action="store" method="post">
-    <input type="text" name="TODO" value="">
-    <input type="submit" value="送信！！">
+  <form action="store.php" method="POST">
+    <input type="hidden" name="token" value="">
+    <input type="text" name="todo">
+    <input type="submit" value="作成！！">
   </form>
+  <div>
+    <a href="index.html">一覧へ戻るよ！！</a>
+  </div>
 </body>
 </html>
